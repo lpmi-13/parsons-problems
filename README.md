@@ -1,7 +1,5 @@
 # Parsons Problems (proof of concept)
 
-[live site](https://parsons-problems.netlify.app)
-
 ## history/context
 
 [parsons problems](https://www.computingatschool.org.uk/news_items/365) are a method of practicing function composition where learners are faced with a function that has the lines out of order. The learner then has to put them back in order. 

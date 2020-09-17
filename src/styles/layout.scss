@@ -1,0 +1,39 @@
+@import './global.scss';
+@import './mixins.scss';
+@import './variables.scss';
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.welcome-text {
+    margin: 1em;
+    font-size: 1rem;
+
+    @include respond-to("small") {
+      margin: 2em 12%;
+      font-size: 2rem;
+    }
+}
+
+.type-links {
+
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    @include respond-to("small") {
+      font-size: 2.45rem;
+    }
+}
+
+.type-link {
+    flex-basis: 20%;
+    padding: 10px 30px;
+}
+
+.container {
+    font-weight: bold;
+}

@@ -1,0 +1,133 @@
+@import './global.scss';
+@import './variables.scss';
+@import './mixins';
+
+.code-content {
+    font-size: 1.5rem;
+    overflow: auto;
+    padding: 1em 0;
+}
+
+.code-line {
+    display: table-row;
+}
+
+.code-snippet {
+
+    margin: 0;
+    box-shadow: 0px 14px 25px #8C8C8C;
+    border-radius: 0.5em;
+    background: white;
+    color: #303332;
+
+
+    @include respond-to("small") {
+        font-size: 0.85rem;
+        margin: 0 15%;
+    }
+
+    &.updating {
+      opacity: 0;
+      transition: 1s ease-in-out;
+    }
+}
+
+.home-screen {
+    margin: 1em;
+}
+
+.github-link {
+    color: black;
+    @include respond-to("small") {
+        font-size: 2rem;
+    }
+}
+
+.pulseChevron {
+    animation: pulse 3s infinite;
+    font-size: 2rem;
+
+    @include respond-to("small") {
+        display: none;
+    }
+}
+
+@keyframes pulse {
+    0% {
+      color: $tech-green; 
+    }
+    100% {
+        color: black;
+    }
+}
+
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-number, .home-screen {
+    font-size: 1rem;
+
+    @include respond-to("small") {
+        font-size: 2rem;
+    }
+}
+
+.project-source {
+    padding: 0.75em;
+
+    @include respond-to("small") {
+        font-size: 2rem;
+    }
+}
+
+.swipe-arrows {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 2em 0;
+
+    .left-arrow, .right-arrow {
+        margin: 0 3em;
+    }
+
+    .left-arrow::after {
+        content: "previous";
+        margin: 0.25em;
+    }
+
+    .right-arrow::after {
+        content: "next";
+        margin: 0.25em;
+    }
+
+
+    .right-arrow {
+        text-align: right;
+    }
+
+    @include respond-to("small") {
+        display: flex;
+        font-size: 2rem;
+
+        .left-arrow::after {
+            margin: 1em;
+        }
+
+        .right-arrow::after {
+            content: "";
+        }
+
+        .right-arrow::before {
+            content: "next";
+            margin: 1em;
+        }
+
+    }
+
+    @include respond-to("medium") {
+        font-size: 2rem;
+    }
+}

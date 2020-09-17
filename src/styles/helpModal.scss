@@ -1,0 +1,75 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.inactive {
+    display: none;
+}
+
+.active {
+    position: absolute;
+    background-color: $light-overlay;
+    opacity: 0.9;
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 82vh;
+    top: 1.25em;
+    width: 92vw;
+    padding-left: 0.75em;
+
+    @include respond-to("small") {
+      top: inherit;
+      height: 86vh;
+    }
+
+    @include respond-to("medium") {
+      height: 92vh;
+    }
+}
+
+.cancel-button {
+    font-size: 4em;
+    color: white;
+}
+
+.ip-list {
+    letter-spacing: 0.1rem;
+    margin-top: 1em;
+
+    @include respond-to("small") {
+      column-count: 2;
+
+      li {
+        padding: 0.25em;
+      }
+    }
+}
+
+.private-ip-range {
+    opacity: 1;
+    color: white;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include respond-to("small") {
+      font-size: 1.25rem;
+    }
+
+    @include respond-to("medium") {
+      font-size: 1.85rem;
+    }
+
+    @include respond-to("large") {
+      font-size: 2.25rem;
+    }
+}
+
+.title {
+    @include respond-to("small") {
+      font-size: 4rem;
+    }
+}

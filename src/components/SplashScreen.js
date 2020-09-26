@@ -11,6 +11,8 @@ const SplashScreen = () => {
             <p className="welcome-text">
               welcome to the examples! Choose a code type to see examples from real github projects.
               Click on the github link to go directly to the line in the original source code.
+
+              You can drag and drop the code lines to re-order them.
             </p>
             <div className="type-links">
               {codeTypes.map(type => {

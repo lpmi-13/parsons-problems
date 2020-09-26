@@ -9,6 +9,8 @@ import data from '../data/function-results.json';
 import '../styles/play.scss';
 
 
+
+
 const PAUSE_LENGTH = 1000;
 
 const Play = (props) => {
@@ -27,21 +29,15 @@ const Play = (props) => {
     setIsUpdating(false);
     setList(snippets[listIndex])
   }, [listIndex, snippets])
+  // move back one, unless we're at the beginning, then go to the last item
+  const indexToMoveBackTo = () => listIndex <= 0 ? snippetLength - 1 : listIndex - 1;
+  // move forward one, unless we're at the end, then go to the first item
+  const indexToMoveForwardTo = () => listIndex >= snippetLength - 1 ? 0 : listIndex + 1;
 
-
-  // move back in the set of code snippets
-  const handleLeftArrowClick = () => {
+  // move back and forward in the code snippets
+  const handleArrowClick = (indexFunction) => {
     setIsUpdating(true);
-    // move back one, unless we're at the beginning, then go to the last item
-    const indexToMoveTo = listIndex <= 0 ? snippetLength - 1 : listIndex - 1;
-    setTimeout(() => setListIndex(indexToMoveTo), PAUSE_LENGTH);
-  }
-
-  // move forward in the set of code snippets
-  const handleRightArrowClick = () => {
-    setIsUpdating(true);
-    // move forward one, unless we're at the end, then go to the first item
-    const indexToMoveTo = listIndex >= snippetLength - 1 ? 0 : listIndex + 1; 
+    const indexToMoveTo = indexFunction();
     setTimeout(() => setListIndex(indexToMoveTo), PAUSE_LENGTH);
   }
 
@@ -69,10 +65,10 @@ const Play = (props) => {
           See it on github <FontAwesomeIcon icon={faGithub} />
         </a>
         <div role="button" aria-label="public or private" className="swipe-arrows">
-          <div className="left-arrow" onClick={handleLeftArrowClick}>
+          <div className="left-arrow" onClick={() => handleArrowClick(indexToMoveBackTo)}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </div>
-          <div className="right-arrow" onClick={handleRightArrowClick}>
+          <div className="right-arrow" onClick={() => handleArrowClick(indexToMoveForwardTo)}>
             <FontAwesomeIcon icon={faArrowRight} />
           </div>
         </div>

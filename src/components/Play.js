@@ -8,8 +8,17 @@ import CodeSnippet from './CodeSnippet';
 import data from '../data/function-results.json';
 import '../styles/play.scss';
 
-
-
+// some good old Fisher-Yates
+const shuffle = arr => {
+  var i = arr.length, j, temp;
+  while(--i > 0){
+    j = Math.floor(Math.random()*(i+1));
+    temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
+}
 
 const PAUSE_LENGTH = 1000;
 
@@ -22,13 +31,24 @@ const Play = (props) => {
   const snippetLength = snippets.length;
 
   const [listIndex, setListIndex] = useState(0)
-  const [list, setList] = useState(snippets[listIndex])
+  const [functionFromList, setFunctionFromList] = useState(snippets[listIndex])
   const [isUpdating, setIsUpdating] = useState(false);
+  const [codeOrder, setCodeOrder] = useState(null);
+
+  useEffect(() => {
+    const {
+      contents: {
+        lines,
+      },
+    } = JSON.parse(functionFromList);
+    setCodeOrder(shuffle(lines));
+  }, [])
 
   useEffect(() => {
     setIsUpdating(false);
-    setList(snippets[listIndex])
+    setFunctionFromList(snippets[listIndex])
   }, [listIndex, snippets])
+
   // move back one, unless we're at the beginning, then go to the last item
   const indexToMoveBackTo = () => listIndex <= 0 ? snippetLength - 1 : listIndex - 1;
   // move forward one, unless we're at the end, then go to the first item
@@ -38,16 +58,21 @@ const Play = (props) => {
   const handleArrowClick = (indexFunction) => {
     setIsUpdating(true);
     const indexToMoveTo = indexFunction();
-    setTimeout(() => setListIndex(indexToMoveTo), PAUSE_LENGTH);
+    const {
+      contents: {
+        lines,
+      },
+    } = JSON.parse(functionFromList);
+    setTimeout(() => {
+      setListIndex(indexToMoveTo);
+      setCodeOrder(shuffle(lines))
+    }, PAUSE_LENGTH);
   }
 
-  const {
-    contents: {
-      lines,
-    },
-    direct_link_to_file_line,
-    project_source
-  } = JSON.parse(list);
+    const {
+      direct_link_to_file_line,
+      project_source
+    } = JSON.parse(functionFromList);
 
   return (
     <Fragment>
@@ -74,7 +99,7 @@ const Play = (props) => {
         </div>
       </div>
       <div className={`code-snippet ${isUpdating ? 'updating' : ''}`} >
-        <CodeSnippet lines={lines} />
+        {codeOrder && <CodeSnippet lines={codeOrder} />}
       </div>
     </Fragment>
   )

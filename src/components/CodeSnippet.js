@@ -10,17 +10,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-// some good old Fisher-Yates
-const shuffle = arr => {
-  var i = arr.length, j, temp;
-  while(--i > 0){
-    j = Math.floor(Math.random()*(i+1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp;
-  }
-  return arr;
-}
+
 
 const grid = 8;
 
@@ -48,7 +38,7 @@ const CodeSnippet = ({ lines }) => {
      setCodeOrder(lines);
    }, [lines]);
 
-    const [codeOrder, setCodeOrder] = useState(shuffle(lines));
+    const [codeOrder, setCodeOrder] = useState(lines);
 
     const onDragEnd = (result) => {
       // dropped outside the list

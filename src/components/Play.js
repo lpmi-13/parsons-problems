@@ -42,7 +42,7 @@ const Play = (props) => {
       },
     } = JSON.parse(functionFromList);
     setCodeOrder(shuffle(lines));
-  }, [])
+  }, [functionFromList])
 
   useEffect(() => {
     setIsUpdating(false);

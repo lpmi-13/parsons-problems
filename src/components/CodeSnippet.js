@@ -14,14 +14,14 @@ const reorder = (list, startIndex, endIndex) => {
 
 const grid = 8;
 
-const getItemStyle = (isDragging, draggableStyle, original_index, current_index) => ({
+const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : original_index === current_index ? "55AA55" : "#D46A6A",
+  background: isDragging && "lightgreen",
 
   // styles we need to apply on draggables
   ...draggableStyle
@@ -69,6 +69,7 @@ const CodeSnippet = ({ lines }) => {
                         <Draggable key={item.line_number.toString()} draggableId={item.line_number.toString()} index={index}>
                           {(provided, snapshot) => (
                             <div
+                              className={index + 1 === item.line_number ? 'correct-line' : 'incorrect-line'}
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}

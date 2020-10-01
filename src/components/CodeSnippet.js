@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { DragDropContext, Draggable, Droppable  } from 'react-beautiful-dnd';
 
 // a little function to help us with reordering the result
@@ -69,7 +70,7 @@ const CodeSnippet = ({ lines }) => {
                         <Draggable key={item.line_number.toString()} draggableId={item.line_number.toString()} index={index}>
                           {(provided, snapshot) => (
                             <div
-                              className={index + 1 === item.line_number ? 'correct-line' : 'incorrect-line'}
+                              className={classNames('code-line', index + 1 === item.line_number ? 'correct-line' : 'incorrect-line')}
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
@@ -81,8 +82,6 @@ const CodeSnippet = ({ lines }) => {
                               )}
                             >
                               {item.line_content}
-                              {`current index is ${index + 1}`}
-                              {`original index is ${item.line_number}`}
                             </div>
                           )}
                         </Draggable>

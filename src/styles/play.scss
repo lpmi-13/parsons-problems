@@ -8,10 +8,6 @@
     padding: 1em 0;
 }
 
-.code-line {
-    display: table-row;
-}
-
 .code-snippet {
 
     margin: 0;
@@ -30,6 +26,10 @@
       opacity: 0;
       transition: 1s ease-in-out;
     }
+}
+
+.code-line {
+    width: fit-content;
 }
 
 .correct-line {

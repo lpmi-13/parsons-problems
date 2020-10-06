@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -38,12 +37,11 @@ const shuffle = arr => {
 }
 
 const PAUSE_LENGTH = 1000;
+const TYPE = 'functions';
 
-const Play = (props) => {
+const Play = () => {
 
-  // used to grab the "type" from the path...this seemed cleaner than having a bunch of different Route components in index.js
-  const { type } = props.match.params;
-  const snippets = data[type];
+  const snippets = data[TYPE];
 
   const snippetLength = snippets.length;
 
@@ -93,12 +91,15 @@ const Play = (props) => {
 
   return (
     <Fragment>
-      <div className="home-screen" >
-        <Link to={"/"}>go back home</Link>
-      </div>
-      <div className="info-wrapper">
+        <p className="welcome-text">
+                welcome to the examples! Choose a code type to see examples from real github projects.
+                Click on the github link to go directly to the line in the original source code.
+
+                You can drag and drop the code lines to re-order them.
+              </p>
+        <div className="info-wrapper">
         <div className="item-number">
-          {type.toUpperCase()}: {listIndex + 1}/{snippetLength}
+          {TYPE}: {listIndex + 1}/{snippetLength}
         </div>
         <div className="project-source">
           {project_source}

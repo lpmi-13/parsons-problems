@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
-import SplashScreen from './components/SplashScreen';
 import Play from './components/Play';
 import Layout from './components/Layout';
 import * as serviceWorker from './serviceWorker';
@@ -11,8 +10,7 @@ ReactDOM.render(
    <Router>
      <Layout>
        <Switch>
-         <Route exact path="/" component={SplashScreen} />
-         <Route path="/:type" component={Play} />
+         <Route exact path="/" component={Play} />
        </Switch>
      </Layout>
    </Router> 

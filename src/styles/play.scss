@@ -51,24 +51,6 @@
     }
 }
 
-.pulseChevron {
-    animation: pulse 3s infinite;
-    font-size: 2rem;
-
-    @include respond-to("small") {
-        display: none;
-    }
-}
-
-@keyframes pulse {
-    0% {
-      color: $tech-green; 
-    }
-    100% {
-        color: black;
-    }
-}
-
 .info-wrapper {
     display: flex;
     flex-direction: column;

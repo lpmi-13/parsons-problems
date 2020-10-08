@@ -41,7 +41,9 @@ const TYPE = 'functions';
 
 const Play = () => {
 
-  const snippets = data[TYPE];
+  const [difficulty, setDifficulty] = useState('small');
+
+  const snippets = data[TYPE][difficulty];
 
   const snippetLength = snippets.length;
 
@@ -57,17 +59,23 @@ const Play = () => {
       },
     } = JSON.parse(functionFromList);
     setCodeOrder(shuffle(lines));
-  }, [functionFromList])
+  }, [functionFromList, difficulty])
 
   useEffect(() => {
     setIsUpdating(false);
     setFunctionFromList(snippets[listIndex])
-  }, [listIndex, snippets])
+  }, [listIndex, snippets, difficulty])
 
   // move back one, unless we're at the beginning, then go to the last item
   const indexToMoveBackTo = () => listIndex <= 0 ? snippetLength - 1 : listIndex - 1;
   // move forward one, unless we're at the end, then go to the first item
   const indexToMoveForwardTo = () => listIndex >= snippetLength - 1 ? 0 : listIndex + 1;
+
+  const handleUpdateDifficulty = (level) => {
+    setDifficulty(level);
+    setListIndex(0);
+    setFunctionFromList(snippets[listIndex]);
+  }
 
   // move back and forward in the code snippets
   const handleArrowClick = (indexFunction) => {
@@ -91,13 +99,21 @@ const Play = () => {
 
   return (
     <Fragment>
-        <p className="welcome-text">
-                welcome to the examples! Choose a code type to see examples from real github projects.
-                Click on the github link to go directly to the line in the original source code.
-
-                You can drag and drop the code lines to re-order them.
-              </p>
-        <div className="info-wrapper">
+      <p className="welcome-text">
+        Choose a difficulty level and drag and drop the code lines to re-order them.
+      </p>
+      <div className="info-wrapper">
+        <div className="buttonRow">
+          <button className={`updateDifficulty ${difficulty === 'small' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('small')} >
+            small ones 
+          </button>
+          <button className={`updateDifficulty ${difficulty === 'medium' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('medium')} >
+            medium ones 
+          </button>
+          <button className={`updateDifficulty ${difficulty === 'large' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('large')} >
+            large ones 
+          </button>
+        </div>
         <div className="item-number">
           {TYPE}: {listIndex + 1}/{snippetLength}
         </div>

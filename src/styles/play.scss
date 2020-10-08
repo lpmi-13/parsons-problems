@@ -2,6 +2,22 @@
 @import './variables.scss';
 @import './mixins';
 
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1em;
+
+    button {
+        margin: 0.5em;
+        border-radius: 0.25em;
+    }
+
+    .active {
+        border: 0.5em solid blue;
+    }
+}
+
 .code-content {
     font-size: 1.5rem;
     overflow: auto;
@@ -88,11 +104,10 @@
         margin: 0.25em;
     }
 
-    .right-arrow::after {
+    .right-arrow::before {
         content: "next";
         margin: 0.25em;
     }
-
 
     .right-arrow {
         text-align: right;

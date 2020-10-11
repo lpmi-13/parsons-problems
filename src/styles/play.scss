@@ -10,16 +10,36 @@
 
     button {
         margin: 0.5em;
-        border-radius: 0.25em;
+        border-radius: 0.5em;
+        min-height: 2.5em;
+        width: 7em;
+        color: white;
+        background-color: #2D4471;
+
+        @include respond-to("small") {
+          font-size: 1.25em;
+        }
     }
 
     .active {
-        border: 0.5em solid blue;
+       box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, 0.2);
+
+       @include respond-to("small") {
+         box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, 0.2);
+       }
     }
 }
 
+.left-arrow, .right-arrow {
+    margin: 0.5em;
+    border-radius: 0.5em;
+    min-height: 2.5em;
+    width: 7em;
+    color: white;
+    background-color: #28774F;
+}
+
 .code-content {
-    font-size: 1.5rem;
     overflow: auto;
     padding: 1em 0;
 }
@@ -34,7 +54,7 @@
 
 
     @include respond-to("small") {
-        font-size: 0.85rem;
+        font-size: 1.55rem;
         margin: 0 15%;
     }
 
@@ -46,14 +66,15 @@
 
 .code-line {
     width: fit-content;
+    border-radius: 0.5em;
 }
 
 .correct-line {
-    background: #55AA55;
+    background: #69d869;
 }
 
 .incorrect-line {
-    background: #D46A6A;
+    background: #f08484;
 }
 
 .home-screen {
@@ -74,7 +95,7 @@
 }
 
 .item-number, .home-screen {
-    font-size: 1rem;
+    font-size: 1.75em;
 
     @include respond-to("small") {
         font-size: 2rem;
@@ -93,46 +114,12 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin: 2em 0;
-
-    .left-arrow, .right-arrow {
-        margin: 0 3em;
-    }
-
-    .left-arrow::after {
-        content: "previous";
-        margin: 0.25em;
-    }
-
-    .right-arrow::before {
-        content: "next";
-        margin: 0.25em;
-    }
-
-    .right-arrow {
-        text-align: right;
-    }
+    margin-top: 2em;
+    width: 100%;
+    text-align: center;
 
     @include respond-to("small") {
-        display: flex;
         font-size: 2rem;
-
-        .left-arrow::after {
-            margin: 1em;
-        }
-
-        .right-arrow::after {
-            content: "";
-        }
-
-        .right-arrow::before {
-            content: "next";
-            margin: 1em;
-        }
-
-    }
-
-    @include respond-to("medium") {
-        font-size: 2rem;
+        width: 70%;
     }
 }

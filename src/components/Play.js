@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import CodeSnippet from './CodeSnippet';
@@ -97,6 +96,12 @@ const Play = () => {
       project_source
     } = JSON.parse(functionFromList);
 
+    // this is ugly, but want to keep the full URLs in the original source
+    const justOrgAndProject = project_source
+                            .split('/')
+                            .slice(-2)
+                            .join('/')
+
   return (
     <Fragment>
       <p className="welcome-text">
@@ -104,32 +109,44 @@ const Play = () => {
       </p>
       <div className="info-wrapper">
         <div className="buttonRow">
-          <button className={`updateDifficulty ${difficulty === 'small' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('small')} >
-            small ones 
+          <button
+            className={`updateDifficulty simple ${difficulty === 'small' ? 'active' : 'inactive'}`}
+            onClick={() => handleUpdateDifficulty('small')}
+            aria-label="simple functions"
+            >
+            simple
           </button>
-          <button className={`updateDifficulty ${difficulty === 'medium' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('medium')} >
-            medium ones 
+          <button
+            className={`updateDifficulty medium ${difficulty === 'medium' ? 'active' : 'inactive'}`}
+            onClick={() => handleUpdateDifficulty('medium')}
+            aria-label="medium functions"
+            >
+            medium
           </button>
-          <button className={`updateDifficulty ${difficulty === 'large' ? 'active' : null}`} onClick={() => handleUpdateDifficulty('large')} >
-            large ones 
+          <button
+            className={`updateDifficulty long ${difficulty === 'large' ? 'active' : 'inactive'}`}
+            onClick={() => handleUpdateDifficulty('large')}
+            aria-label="complex functions"
+            >
+            complex
           </button>
         </div>
         <div className="item-number">
           {TYPE}: {listIndex + 1}/{snippetLength}
         </div>
         <div className="project-source">
-          {project_source}
+          {justOrgAndProject}
         </div>
         <a className="github-link" href={`${direct_link_to_file_line}`} target="_blank" rel="noopener noreferrer">
           See it on github <FontAwesomeIcon icon={faGithub} />
         </a>
         <div role="button" className="swipe-arrows">
-          <div className="left-arrow" onClick={() => handleArrowClick(indexToMoveBackTo)}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-          <div className="right-arrow" onClick={() => handleArrowClick(indexToMoveForwardTo)}>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </div>
+          <button aria-label="previous function" className="left-arrow" onClick={() => handleArrowClick(indexToMoveBackTo)}>
+            previous
+          </button>
+          <button aria-label="next function" className="right-arrow" onClick={() => handleArrowClick(indexToMoveForwardTo)}>
+            next
+          </button>
         </div>
       </div>
       <div className={`code-snippet ${isUpdating ? 'updating' : ''}`} >

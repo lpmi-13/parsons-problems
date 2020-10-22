@@ -77,10 +77,6 @@
     background: #f08484;
 }
 
-.home-screen {
-    margin: 1em;
-}
-
 .github-link {
     color: black;
     @include respond-to("small") {
@@ -94,7 +90,7 @@
     align-items: center;
 }
 
-.item-number, .home-screen {
+.item-number {
     font-size: 1.75em;
 
     @include respond-to("small") {

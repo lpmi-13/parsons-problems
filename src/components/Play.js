@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { motion } from 'framer-motion';
 
 import CodeSnippet from './CodeSnippet';
 import data from '../data/function-results.json';
@@ -79,14 +80,13 @@ const Play = () => {
   // move back and forward in the code snippets
   const handleArrowClick = (indexFunction) => {
     setIsUpdating(true);
-    const indexToMoveTo = indexFunction();
     const {
       contents: {
         lines,
       },
     } = JSON.parse(functionFromList);
     setTimeout(() => {
-      setListIndex(indexToMoveTo);
+      setListIndex(indexFunction());
       setCodeOrder(shuffle(lines))
     }, PAUSE_LENGTH);
   }
@@ -109,27 +109,33 @@ const Play = () => {
       </p>
       <div className="info-wrapper">
         <div className="buttonRow">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className={`updateDifficulty simple ${difficulty === 'small' ? 'active' : 'inactive'}`}
             onClick={() => handleUpdateDifficulty('small')}
             aria-label="simple functions"
             >
             simple
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className={`updateDifficulty medium ${difficulty === 'medium' ? 'active' : 'inactive'}`}
             onClick={() => handleUpdateDifficulty('medium')}
             aria-label="medium functions"
             >
             medium
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className={`updateDifficulty long ${difficulty === 'large' ? 'active' : 'inactive'}`}
             onClick={() => handleUpdateDifficulty('large')}
             aria-label="complex functions"
             >
             complex
-          </button>
+          </motion.button>
         </div>
         <div className="item-number">
           {TYPE}: {listIndex + 1}/{snippetLength}
@@ -141,12 +147,12 @@ const Play = () => {
           See it on github <FontAwesomeIcon icon={faGithub} />
         </a>
         <div role="button" className="swipe-arrows">
-          <button aria-label="previous function" className="left-arrow" onClick={() => handleArrowClick(indexToMoveBackTo)}>
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} aria-label="previous function" className="left-arrow" onClick={() => handleArrowClick(indexToMoveBackTo)}>
             previous
-          </button>
-          <button aria-label="next function" className="right-arrow" onClick={() => handleArrowClick(indexToMoveForwardTo)}>
+          </motion.button>
+          <motion.button  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}aria-label="next function" className="right-arrow" onClick={() => handleArrowClick(indexToMoveForwardTo)}>
             next
-          </button>
+          </motion.button>
         </div>
       </div>
       <div className={`code-snippet ${isUpdating ? 'updating' : ''}`} >

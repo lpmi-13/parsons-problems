@@ -1,4 +1,4 @@
-# Parsons Problems (proof of concept)
+# Parsons Problems
 
 ## history/context
 
@@ -14,6 +14,13 @@ Another advantage of this approach is that when viewing a particular code snippe
 
 This approach also contains disadvantages, however, since it's not trivial to extract the purpose of the function from the source code. So the only thing we can really do with these snippets is just ask the learner to put them back in order. It's also not trivial to determine whether the reordered code, if different from the original order, would still run. This is easier to do with AST parsing for JS, but for python is a bit more difficult. For that reason, this project only focuses on putting the function back into the ORIGINAL order rather than putting it into a POSSIBLE successful order.
 
+I wrote a more in-depth [blog post](https://micromaterialsblog.wordpress.com/2020/10/21/more-authentic-parsons-problems/) about this, though if you'd just like to see it in action, that's below:
+
+https://parsons-problems.netlify.app/
+
+## Data source
+
+Uses [this repo](https://github.com/lpmi-13/python-code-corpus), which currently only grabs python functions, but I'm hoping to eventually add support for other languages.
 
 ## Running locally
 
